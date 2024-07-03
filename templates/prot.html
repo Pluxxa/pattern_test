@@ -1,10 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+    Prototypes
+{% endblock %}
+
+{% block content %}
+<style>
+    .card {
+        height: 350px;
+        overflow: hidden;
+        position: relative;
+        transition: height 0.3s ease-in-out;
+    }
+    .card.expanded {
+        height: auto;
+    }
+    .card-img-top {
+        height: 150px;
+        object-fit: cover;
+    }
+    .card-title {
+        font-size: 0.9rem; /* уменьшенный шрифт для заголовка */
+        line-height: 1.2; /* уменьшенная высота строки */
+        height: 2.4rem; /* фиксированная высота для заголовка */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* показывать не более двух строк */
+        -webkit-box-orient: vertical;
+        cursor: pointer; /* курсор при наведении */
+        white-space: nowrap;
+    }
+    .card-title:hover::after {
+        content: attr(title); /* показывает полный текст в подсказке */
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        white-space: nowrap;
+        z-index: 100;
+        transform: translateY(-100%);
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .card-text {
+        font-size: 0.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5; /* уменьшить количество отображаемых строк */
+        -webkit-box-orient: vertical;
+        transition: all 0.3s ease-in-out;
+        margin-bottom: 50px; /* увеличить пространство для кнопки */
+    }
+    .card-text.expanded {
+        -webkit-line-clamp: unset;
+        display: block;
+        margin-bottom: 0;
+    }
+    .read-more {
+        font-size: 0.8rem;
+        color: #007bff;
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        {% for model, data in prot.items() %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card">
+                <img src="{{ data[0] }}" class="card-img-top" alt="{{ model }}">
+                <div class="card-body">
+                    <h5 class="card-title" title="{{ model }}">{{ model }}</h5>
+                    <p class="card-text">{{ data[1] }}</p>
+                    <span class="read-more">Читать дальше</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const readMoreButtons = document.querySelectorAll('.read-more');
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.card');
+                const cardText = this.previousElementSibling;
+                cardText.classList.toggle('expanded');
+                card.classList.toggle('expanded');
+                this.textContent = cardText.classList.contains('expanded') ? 'Свернуть' : 'Читать дальше';
+            });
+        });
+    });
+</script>
+{% endblock %}
