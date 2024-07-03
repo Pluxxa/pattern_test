@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Ferrari</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history/">История</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/autolist/" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Список автомобилей Ferrari
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/supercar/">Суперкары</a></li>
+                            <li><a class="dropdown-item" href="/race car/">Гоночные автомобили</a></li>
+                            <li><a class="dropdown-item" href="/prot/">Прототипы и исследования дизайна</a></li>
+                            <li><a class="dropdown-item" href="/grand/">Grand-Prix и F1 купе</a></li>
+                            <li><a class="dropdown-item" href="/coupe/">2 местное купе</a></li>
+                            <li><a class="dropdown-item" href="/other/">Другие модели</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Футер -->
+    <footer class="bg-dark text-light text-center text-lg-start mt-4">
+        <div class="container p-4">
+            <div class="row">
+                <!-- Контактная информация -->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Контактная информация</h5>
+                    <p>
+                        Адрес: ул. Феррари, д. 1<br>
+                        Телефон: +39 0536 949111<br>
+                        Email: info@ferrari.com
+                    </p>
+                </div>
+                <!-- Социальные сети -->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Социальные сети</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/Ferrari" class="text-light">Facebook</a></li>
+                        <li><a href="https://twitter.com/Ferrari" class="text-light">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/ferrari/" class="text-light">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/company/ferrari/" class="text-light">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Ferrari. Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Подключение Bootstrap JS и jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
